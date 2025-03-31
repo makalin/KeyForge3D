@@ -2,16 +2,22 @@
 
 ![KeyForge3D Logo](keyforge3d.png)
 
-**KeyForge3D** is an innovative application that extracts the shape of a physical key from a photo, generates a 3D model of the key, and exports it as an STL file for 3D printing. This tool is designed for locksmiths, hobbyists, or anyone needing a quick way to replicate a key using a 3D printer. The app uses image processing to analyze the key's bitting pattern and converts it into a printable 3D model.
+**KeyForge3D** is an innovative application that extracts the shape of a physical key from a photo, generates a 3D model of the key, and exports it as an STL file for 3D printing. This tool is designed for locksmiths, hobbyists, or anyone needing a quick way to replicate a key using a 3D printer. The app features a user-friendly GUI built with Tkinter, making it easy to upload an image, process the key, and generate a 3D model.
 
 ## Features
 
-- **Key Shape Extraction**: Upload or capture a photo of a key to extract its 2D profile.
+- **Key Shape Extraction**: Upload a photo of a key to extract its 2D profile.
 - **Bitting Analysis**: Automatically detect and analyze the key's bitting pattern (e.g., "05624").
 - **3D Model Generation**: Convert the 2D key profile into a 3D model with accurate cuts and dimensions.
 - **STL Export**: Export the 3D model as an STL file, ready for 3D printing.
-- **Preview**: View the generated 3D model before exporting (planned feature).
-- **Scalability**: Scale the key to real-world dimensions using a reference object (e.g., a coin).
+- **User-Friendly GUI**: Simple interface to upload images and generate models with a single click.
+- **Scalability**: Scale the key to real-world dimensions (default: 1 pixel = 0.1 mm; can be adjusted with a reference object).
+
+## Demo
+
+![KeyForge3D Sample](sample.png)
+
+The app processes a photo of a key, extracts its shape, and generates a 3D model like the one shown above. The bitting code (e.g., "05624") is also displayed for reference.
 
 ## Installation
 
@@ -28,12 +34,13 @@ KeyForge3D relies on the following Python libraries:
 - `opencv-python`: For image processing and key shape extraction.
 - `numpy`: For numerical operations.
 - `trimesh`: For 3D model generation and STL export.
-- `shapely`: For polygon operations during 3D model creation.
+- `shapely`: For polygon operations.
+- `pillow`: For image display in the GUI.
 
 Install the dependencies using the following command:
 
 ```bash
-pip install opencv-python numpy trimesh shapely
+pip install opencv-python numpy trimesh shapely pillow
 ```
 
 ### Clone the Repository
@@ -47,34 +54,43 @@ cd KeyForge3D
 
 ## Usage
 
-1. **Prepare a Key Photo**:
-   - Place the key on a plain background (e.g., white paper) with good lighting.
-   - Optionally, include a reference object (e.g., a coin) for accurate scaling.
-
-2. **Run the Script**:
-   - Update the script to point to your key image file.
-   - Run the main script to process the image and generate the 3D model:
+1. **Run the App**:
+   - Run the main script to launch the GUI:
 
    ```bash
    python keyforge3d.py
    ```
 
-3. **Output**:
-   - The script will output the bitting code (e.g., "05624") to the console.
-   - A file named `key_model.stl` will be generated in the project directory.
+2. **Upload a Key Photo**:
+   - Click the "Upload Key Image" button and select a photo of a key.
+   - The key should be placed on a plain background (e.g., white paper) with good lighting for best results.
+   - Optionally, include a reference object (e.g., a coin) for accurate scaling (scaling is currently set to 1 pixel = 0.1 mm).
+
+3. **Process the Key**:
+   - Click the "Process Key and Generate 3D Model" button.
+   - The app will process the image, display the bitting code, and save the 3D model as `key_model.stl`.
 
 4. **3D Printing**:
    - Open the `key_model.stl` file in your 3D printing software (e.g., Cura, PrusaSlicer).
    - Print the key using a strong material like PLA or ABS. Use a high resolution (e.g., 0.1 mm layer height) for accurate bitting cuts.
 
+## Code Overview
+
+The main script (`keyforge3d.py`) includes:
+
+- **GUI**: Built with Tkinter for user interaction.
+- **Image Processing**: Uses OpenCV to detect the key's outline and analyze its bitting pattern.
+- **3D Model Generation**: Uses Trimesh to create a 3D model and export it as an STL file.
+- **Error Handling**: Includes basic error handling for invalid images or processing failures.
+
 ## Roadmap
 
-- [ ] Add a graphical user interface (GUI) using Tkinter or Flutter.
-- [ ] Implement a 3D model preview within the app.
+- [ ] Add a 3D model preview within the app.
 - [ ] Support for scaling using a reference object (e.g., a coin).
 - [ ] Add key type identification (e.g., Schlage SC4, Kwikset KW1).
 - [ ] Improve bitting analysis accuracy with machine learning.
 - [ ] Create a mobile app version with camera integration.
+- [ ] Add support for more key profiles and bitting standards.
 
 ## Contributing
 
@@ -95,7 +111,7 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 ## Acknowledgments
 
 - Inspired by locksmith tools for key bitting analysis.
-- Built with the help of open-source libraries like OpenCV and Trimesh.
+- Built with the help of open-source libraries like OpenCV, Trimesh, and Tkinter.
 
 ## Contact
 
